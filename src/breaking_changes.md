@@ -37,6 +37,16 @@ must be changed to something like
 keep-weekly-within = "3 months"
 ```
 
+Warmup command now supports receiving multiple packs at once to support batch operations,
+and it now supports pack paths in addition to pack IDs.
+
+    ./my-warmup-command %id        # invokes command for one pack ID at a time (original support)
+    ./my-warmup-command %path      # invokes command for one pack path at a time (new)
+    ./my-warmup-command %ids       # invokes command for N pack IDs at a time (new)
+    ./my-warmup-command %paths     # invokes command for N pack paths at a time (new)
+
+Additionally, when configured to use batches of N>1 packs, yet the warmup command references one pack at a time, rustic invokes the warmup command N instances in parallel.
+
 ### Removed options
 
 The option `quiet` has been removed for the `backup` and `forget` command;
